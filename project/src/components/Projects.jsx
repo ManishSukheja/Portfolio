@@ -40,7 +40,7 @@ const Projects = () => {
         return 'bg-blue-500/20 text-blue-400 border-blue-400/30';
       case 'Mobile Application':
         return 'bg-green-500/20 text-green-400 border-green-400/30';
-      case 'E-Commerce':
+      case 'Standalone Application':
         return 'bg-purple-500/20 text-purple-400 border-purple-400/30';
       default:
         return 'bg-accent/20 text-accent border-accent/30';
@@ -188,6 +188,16 @@ const Projects = () => {
                         className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-accent to-accentLight text-white rounded-lg hover:scale-105 transition-transform"
                       >
                         <FaExternalLinkAlt /> Live Demo
+                      </a>
+                    )}
+                    {project.reportLink && (
+                      <a
+                        href={project.reportLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-accent to-accentLight text-white rounded-lg hover:scale-105 transition-transform"
+                      >
+                        <FaExternalLinkAlt /> Project Report
                       </a>
                     )}
                   </div>

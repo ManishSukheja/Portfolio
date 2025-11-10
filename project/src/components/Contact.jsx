@@ -127,13 +127,15 @@ const Contact = () => {
               </div>
 
               <div className="mt-8 p-6 bg-primary rounded-xl border border-accent/20">
-                <h4 className="text-xl font-semibold text-textColor">Current Status</h4>
-                <div className="space-y-3 text-textColor/80">
-                  <div className="mt-3 inline-block px-4 py-2 bg-green-500/20 text-green-400 rounded-lg border border-green-400/30">
+                <div className="flex items-center gap-4">
+                  <h4 className="text-xl font-semibold text-textColor mb-0">Current Status:</h4>
+                  <div className="inline-block px-4 py-2 bg-green-500/20 text-green-400 rounded-lg border border-green-400/30">
                     Open to Work
                   </div>
-                  <p>Available for full-time remote and on-site opportunities.</p>
                 </div>
+                <p className="mt-3 text-textColor/80">
+                  Available for full-time remote and on-site opportunities.
+                </p>
               </div>
             </motion.div>
           </div>

@@ -96,14 +96,13 @@ const About = () => {
 
           <motion.div variants={itemVariants}>
             <h3 className="text-3xl font-bold text-textColor mb-8 text-center">Education</h3>
-            <div className="w-full max-w-7xl mx-auto flex flex-row gap-6 flex-wrap justify-center">
-
-              {education.map((edu, index) => (
-                <motion.div
-                  key={index}
-                  variants={itemVariants}
-                  className="bg-primary p-6 rounded-xl border-l-4 border-accent hover:shadow-xl transition-all min-w-[500px] max-w-xl"
-                >
+            <div className="w-full max-w-3xl mx-auto flex flex-col gap-6 sm:flex-row sm:flex-wrap sm:justify-center">
+  {education.map((edu, index) => (
+    <motion.div
+      key={index}
+      variants={itemVariants}
+      className="bg-primary p-6 rounded-xl border-l-4 border-accent hover:shadow-xl transition-all w-full sm:min-w-[350px] sm:max-w-xs"
+    >
                   <div className="flex items-start justify-between flex-wrap gap-4">
                     <div>
                       <h4 className="text-xl font-semibold text-textColor mb-2">{edu.degree}</h4>
