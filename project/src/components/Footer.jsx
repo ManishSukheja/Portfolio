@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="text-textColor/70 text-center md:text-left">
             <p className="flex items-center gap-2 justify-center md:justify-start">
-              Built with <FaHeart className="text-red-500" /> by Manish Sukheja
+              <FaHeart className="text-red-500" /> Built with passion by Manish Sukheja
             </p>
           </div>
 
