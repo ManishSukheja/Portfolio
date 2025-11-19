@@ -50,7 +50,6 @@ npm run build
 ## Contact Information
 
 - **Email**: mani.s.sukheja@gmail.com
-- **Phone**: +91-9096020809
 - **GitHub**: [ManishSukheja](https://github.com/ManishSukheja)
 - **LinkedIn**: [manish-sukheja](https://linkedin.com/in/manish-sukheja)
 - **Location**: Mumbai, Maharashtra, India
