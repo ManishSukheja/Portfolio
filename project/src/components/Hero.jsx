@@ -66,7 +66,7 @@ const Hero = () => {
               transition={{ delay: 0.5 }}
               className="text-textColor/80 text-lg mb-8 leading-relaxed"
             >
-              Passionate Full Stack Developer with 3 years of professional experience.
+              A Passionate Developer with 3 years of professional experience.
               I specialize in building scalable web applications using React.js, Java,
               Spring Boot, and modern technologies. <br/>
               Actively expanding my skill set to include Ai leveraging the latest advancements to create smarter, more impactful solutions.
