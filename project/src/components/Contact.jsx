@@ -134,7 +134,7 @@ const Contact = () => {
                   </div>
                 </div>
                 <p className="mt-3 text-textColor/80">
-                  Available for full-time remote and on-site opportunities.
+                  Available for full-time, remote and on-site opportunities.
                 </p>
               </div>
             </motion.div>
