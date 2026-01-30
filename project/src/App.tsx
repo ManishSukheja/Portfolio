@@ -9,9 +9,12 @@ import Footer from './components/Footer';
 import { Analytics } from '@vercel/analytics/react';
 
 
+import LiquidBackground from './components/LiquidBackground';
+
 function App() {
   return (
-    <div className="min-h-screen bg-primary">
+    <div className="min-h-screen text-textColor relative overflow-hidden">
+      <LiquidBackground />
       <Navbar />
       <Hero />
       <About />

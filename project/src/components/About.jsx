@@ -47,7 +47,7 @@ const About = () => {
   };
 
   return (
-    <section id="about" className="py-20 bg-secondary">
+    <section id="about" className="py-20 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
@@ -55,16 +55,20 @@ const About = () => {
           animate={inView ? 'visible' : 'hidden'}
           variants={containerVariants}
         >
-          <motion.h2
-            variants={itemVariants}
-            className="text-4xl md:text-5xl font-bold text-center mb-4"
-          >
-            <span className="bg-gradient-to-r from-accent to-accentLight bg-clip-text text-transparent">
-              About Me
-            </span>
-          </motion.h2>
+          <div className="flex flex-col items-center justify-center mb-16">
+            <motion.div 
+              variants={itemVariants}
+              className="glass-card px-8 py-3 rounded-full mb-4 bg-white/40 backdrop-blur-md border border-white/50 shadow-sm"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-center">
+                <span className="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent drop-shadow-sm">
+                  About Me
+                </span>
+              </h2>
+            </motion.div>
+          </div>
 
-          <motion.div variants={itemVariants} className="max-w-4xl mx-auto space-y-6 mb-12 text-textColor/80 text-lg">
+          <motion.div variants={itemVariants} className="glass-card p-8 rounded-2xl max-w-4xl mx-auto space-y-6 mb-12 text-slate-600 text-lg shadow-lg">
             <p>
               I'm a passionate Full Stack Developer with approximately 3 years of professional experience.
               I specialize in building robust, scalable web applications and have a strong background in
@@ -86,27 +90,27 @@ const About = () => {
                 key={index}
                 variants={itemVariants}
                 whileHover={{ scale: 1.05 }}
-                className="bg-primary p-6 rounded-xl text-center border border-accent/20 hover:border-accent/50 transition-all"
+                className="glass-card p-6 rounded-xl text-center transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="text-3xl md:text-4xl font-bold text-accent mb-2">{stat.value}</div>
-                <div className="text-textColor/70 text-sm md:text-base">{stat.label}</div>
+                <div className="text-slate-600 text-sm md:text-base">{stat.label}</div>
               </motion.div>
             ))}
           </motion.div>
 
           <motion.div variants={itemVariants}>
-            <h3 className="text-3xl font-bold text-textColor mb-8 text-center">Education</h3>
+            <h3 className="text-3xl font-bold text-slate-900 mb-8 text-center">Education</h3>
             <div className="w-full max-w-3xl mx-auto flex flex-col gap-6 sm:flex-row sm:flex-wrap sm:justify-center">
   {education.map((edu, index) => (
     <motion.div
       key={index}
       variants={itemVariants}
-      className="bg-primary p-6 rounded-xl border-l-4 border-accent hover:shadow-xl transition-all w-full sm:min-w-[350px] sm:max-w-xs"
+      className="glass-card p-6 rounded-xl border-l-[6px] border-l-accent transition-all w-full sm:min-w-[350px] sm:max-w-xs hover:shadow-lg"
     >
                   <div className="flex items-start justify-between flex-wrap gap-4">
                     <div>
-                      <h4 className="text-xl font-semibold text-textColor mb-2">{edu.degree}</h4>
-                      <p className="text-textColor/70">{edu.institution}</p>
+                      <h4 className="text-xl font-semibold text-slate-900 mb-2">{edu.degree}</h4>
+                      <p className="text-slate-600">{edu.institution}</p>
                     </div>
                     <div className="px-4 py-2 bg-accent/10 rounded-lg text-accent font-semibold">
                       {edu.date}

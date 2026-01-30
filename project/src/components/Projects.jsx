@@ -48,7 +48,7 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-20 bg-secondary">
+    <section id="projects" className="py-20 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
@@ -56,20 +56,24 @@ const Projects = () => {
           animate={inView ? 'visible' : 'hidden'}
           variants={containerVariants}
         >
-          <motion.h2
-            variants={itemVariants}
-            className="text-4xl md:text-5xl font-bold text-center mb-4"
-          >
-            <span className="bg-gradient-to-r from-accent to-accentLight bg-clip-text text-transparent">
-              Featured Projects
-            </span>
-          </motion.h2>
-          <motion.p
-            variants={itemVariants}
-            className="text-center text-textColor/70 mb-12 text-lg"
-          >
-            A showcase of my recent work and achievements
-          </motion.p>
+          <div className="flex flex-col items-center justify-center mb-16">
+            <motion.div 
+              variants={itemVariants}
+              className="glass-card px-8 py-3 rounded-full mb-4 bg-white/40 backdrop-blur-md border border-white/50 shadow-sm"
+            >
+               <h2 className="text-4xl md:text-5xl font-bold text-center">
+                <span className="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent drop-shadow-sm">
+                  Featured Projects
+                </span>
+              </h2>
+            </motion.div>
+            <motion.p
+              variants={itemVariants}
+              className="text-center text-slate-600 text-lg font-medium"
+            >
+              A showcase of my recent work and achievements
+            </motion.p>
+          </div>
 
           <motion.div
             variants={containerVariants}
@@ -80,12 +84,12 @@ const Projects = () => {
                 key={project.id}
                 variants={itemVariants}
                 whileHover={{ scale: 1.02 }}
-                className="bg-secondary rounded-xl overflow-hidden border border-accent/20 hover:border-accent/50 hover:shadow-2xl transition-all"
+                className="glass-card rounded-xl overflow-hidden transition-all duration-300"
               >
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex-1">
-                      <h3 className="text-2xl font-bold text-textColor mb-2">
+                      <h3 className="text-2xl font-bold text-slate-900 mb-2">
                         {project.title}
                       </h3>
                       <div className="flex flex-wrap gap-2 mb-3">
@@ -103,7 +107,7 @@ const Projects = () => {
                     </div>
                   </div>
 
-                  <p className="text-textColor/80 mb-4">{project.description}</p>
+                  <p className="text-slate-600 mb-4">{project.description}</p>
 
                   <button
                     onClick={() => toggleExpand(project.id)}
@@ -135,7 +139,7 @@ const Projects = () => {
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: idx * 0.1 }}
-                                className="flex items-start gap-2 text-textColor/80"
+                                className="flex items-start gap-2 text-slate-600"
                               >
                                 <span className="text-accent mt-1">▹</span>
                                 <span>{achievement}</span>
@@ -149,7 +153,7 @@ const Projects = () => {
                             {project.features.map((feature, idx) => (
                               <span
                                 key={idx}
-                                className="px-3 py-1 bg-primary text-accentLight border border-accent/30 rounded-full text-sm"
+                                className="px-3 py-1 bg-white/40 text-accentLight border border-accent/20 rounded-full text-sm"
                               >
                                 {feature}
                               </span>
@@ -164,7 +168,7 @@ const Projects = () => {
                     {project.technologies.map((tech, idx) => (
                       <span
                         key={idx}
-                        className="px-3 py-1 bg-primary text-textColor/70 rounded-lg text-sm border border-accent/20"
+                        className="px-3 py-1 bg-white/40 text-slate-600 rounded-lg text-sm border border-accent/10"
                       >
                         {tech}
                       </span>
@@ -176,7 +180,7 @@ const Projects = () => {
                       href={project.githubLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-primary text-accent border border-accent rounded-lg hover:bg-accent hover:text-white transition-all"
+                      className="flex items-center gap-2 px-4 py-2 glass-card text-accent rounded-lg hover:text-white hover:bg-accent transition-all"
                     >
                       <FaGithub /> GitHub
                     </a>

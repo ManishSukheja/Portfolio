@@ -4,11 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#0f172a',
-        secondary: '#1e293b',
-        accent: '#06b6d4',
-        accentLight: '#22d3ee',
-        textColor: '#e2e8f0',
+        primary: '#f0f9ff',
+        secondary: 'rgba(255, 255, 255, 0.7)',
+        accent: '#0891b2', // Darker cyan (700) for better text contrast
+        accentLight: '#06b6d4', // Cyan 500
+        textColor: '#020617', // Very dark slate/black
+        muted: '#475569', // Slate 600 for secondary text
+        mutedLight: '#64748b', // Slate 500
       },
     },
   },
