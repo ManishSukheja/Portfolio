@@ -15,8 +15,11 @@ const LiquidBackground = () => {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
       
+      const isMobile = width < 768;
+      
       particles = [];
-      const particleCount = 15; 
+      // Reduce particle count significantly on mobile for performance
+      const particleCount = isMobile ? 6 : 12; 
       
       for (let i = 0; i < particleCount; i++) {
         particles.push({
@@ -24,7 +27,7 @@ const LiquidBackground = () => {
           y: Math.random() * height,
           vx: (Math.random() - 0.5) * 1.5,
           vy: (Math.random() - 0.5) * 1.5,
-          size: Math.random() * 150 + 100, // Much larger blobs
+          size: isMobile ? Math.random() * 80 + 60 : Math.random() * 150 + 100, // Smaller blobs on mobile
           // Soft pastel gradients for light theme liquid
           color: `hsla(${Math.random() * 60 + 180}, 80%, 75%, 0.8)` 
         });
@@ -38,6 +41,14 @@ const LiquidBackground = () => {
     const handleMouseMove = (e) => {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
+    };
+    
+    // Add touch support for mobile interaction
+    const handleTouchMove = (e) => {
+      if (e.touches.length > 0) {
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+      }
     };
 
     const update = () => {
@@ -101,9 +112,9 @@ const LiquidBackground = () => {
         // Draw Organic Wobbly Mouse Blob - Smoother & Slower for better merging
         const t = Date.now() * 0.0015; // Much slower for viscous feel
         ctx.beginPath();
-        const baseRadius = 80;
+        const baseRadius = width < 768 ? 50 : 80; // Smaller cursor blobon mobile
         
-        for (let angle = 0; angle <= Math.PI * 2; angle += 0.05) {
+        for (let angle = 0; angle <= Math.PI * 2; angle += 0.1) { // Reduced resolution (0.05 -> 0.1) for performance
             
             // Harmonic 1: Oval distortion (Slow breathing)
             const h1 = Math.sin(angle * 2 + t) * 10;
@@ -133,12 +144,14 @@ const LiquidBackground = () => {
 
     window.addEventListener('resize', handleResize);
     window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('touchmove', handleTouchMove);
     init();
     update();
 
     return () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchmove', handleTouchMove);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
