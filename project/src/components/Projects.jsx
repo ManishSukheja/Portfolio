@@ -5,17 +5,17 @@ import { FaGithub, FaExternalLinkAlt, FaChevronDown, FaChevronUp } from 'react-i
 import { projects } from '../data/projects';
 
 const Projects = () => {
+  const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
   const [expandedId, setExpandedId] = useState(null);
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: isMobile ? 0.05 : 0.1,
+    rootMargin: isMobile ? '-50px 0px' : '-100px 0px',
   });
 
   const toggleExpand = (id) => {
     setExpandedId(expandedId === id ? null : id);
   };
-
-  const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
 
   const containerVariants = {
     hidden: { opacity: 0 },

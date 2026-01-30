@@ -3,12 +3,13 @@ import { useInView } from 'react-intersection-observer';
 import { skillCategories } from '../data/skills';
 
 const Skills = () => {
+  const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: isMobile ? 0.05 : 0.1,
+    rootMargin: isMobile ? '-50px 0px' : '-100px 0px',
   });
-
-  const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
 
   const containerVariants = {
     hidden: { opacity: 0 },

@@ -112,10 +112,9 @@ const LiquidBackground = () => {
              const scrollY = window.scrollY;
 
              particles.forEach((p, i) => {
-                 // Apply Simple Parallax
-                 // Blobs move up slightly as you scroll down
-                 p.y = p.initialY - (scrollY * p.parallaxSpeed);
-
+                 // No scrolling logic for static blobs
+                 // They stay fixed in place and just morph
+                 
                  ctx.beginPath();
                  const segments = 20; // Low poly for speed
                  const step = (Math.PI * 2) / segments;

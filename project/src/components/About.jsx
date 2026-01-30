@@ -2,9 +2,12 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 const About = () => {
+  const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: isMobile ? 0.05 : 0.1, // Trigger almost immediately on mobile
+    rootMargin: isMobile ? '-50px 0px' : '-100px 0px', // Start animation before it's too high up
   });
 
   const stats = [
@@ -27,7 +30,7 @@ const About = () => {
     },
   ];
 
-  const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+
 
   const containerVariants = {
     hidden: { opacity: 0 },
