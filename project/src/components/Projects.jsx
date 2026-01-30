@@ -15,22 +15,24 @@ const Projects = () => {
     setExpandedId(expandedId === id ? null : id);
   };
 
+  const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: isMobile ? 0.1 : 0.2,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, scale: 0.9 },
+    hidden: isMobile ? { opacity: 0 } : { opacity: 0, scale: 0.9 },
     visible: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.6 },
+      transition: { duration: isMobile ? 0.3 : 0.6 },
     },
   };
 

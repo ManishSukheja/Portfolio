@@ -8,22 +8,24 @@ const Skills = () => {
     threshold: 0.1,
   });
 
+  const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: isMobile ? 0.05 : 0.1, // Very fast stagger for skills grid
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: isMobile ? { opacity: 0 } : { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6 },
+      transition: { duration: isMobile ? 0.3 : 0.6 },
     },
   };
 

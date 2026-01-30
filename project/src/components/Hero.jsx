@@ -26,20 +26,21 @@ const Hero = () => {
     }
   }, [index]);
 
+  const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center pt-16 relative z-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="glass-card p-8 rounded-2xl relative z-10 backdrop-blur-xl bg-white/40 border border-white/60 shadow-xl"
-          >
+    <section id="home" className="min-h-screen relative flex items-center justify-center pt-16 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        
+        {/* Text Content */}
+        <div className="order-2 md:order-1 text-center md:text-left">
+          <div className="glass-card p-6 sm:p-8 md:p-10 rounded-3xl shadow-xl backdrop-blur-md border border-white/40 bg-white/30 relative overflow-hidden group hover:border-accent/30 transition-colors duration-500">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+            
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
+              transition={{ delay: isMobile ? 0.1 : 0.3, duration: isMobile ? 0.4 : 0.6 }}
               className="text-5xl md:text-6xl font-bold text-slate-900 mb-4 drop-shadow-sm"
             >
               Hi, I'm <br/><span className="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent drop-shadow-sm">Manish Sukheja</span>
@@ -47,8 +48,8 @@ const Hero = () => {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="text-2xl md:text-3xl text-slate-800 font-semibold mb-6 h-10 flex items-center gap-2"
+              transition={{ delay: isMobile ? 0.2 : 0.4 }}
+              className="text-2xl md:text-3xl text-slate-800 font-semibold mb-6 h-10 flex items-center justify-center md:justify-start gap-2"
             >
               {displayText}
               <span className="w-1 h-8 bg-slate-900 animate-pulse block"></span>
@@ -56,72 +57,55 @@ const Hero = () => {
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: isMobile ? 0.3 : 0.5 }}
               className="text-slate-700 text-lg mb-8 leading-relaxed font-medium"
             >
-              A Passionate Developer with 3 years of professional experience.
-              I specialize in building scalable web applications using React.js, Java,
-              Spring Boot, and modern technologies. <br/>
-              Actively expanding my skill set to include Ai leveraging the latest advancements to create smarter, more impactful solutions.
+              I build exceptional digital experiences that live on the internet. 
+              Focused on creating accessible, pixel-perfect, and performant web applications.
             </motion.p>
-
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="flex flex-wrap gap-4 mb-8"
+              transition={{ delay: isMobile ? 0.4 : 0.6, duration: isMobile ? 0.4 : 0.6 }}
+              className="flex flex-wrap gap-4 justify-center md:justify-start"
             >
-              <Link to="projects" smooth duration={500}>
-                <button className="px-6 py-3 bg-accent text-white rounded-lg font-bold hover:bg-accentLight shadow-lg hover:shadow-cyan-400/30 transition-all transform hover:-translate-y-1">
-                  View My Work
-                </button>
+              <Link
+                to="projects"
+                smooth
+                duration={500}
+                className="px-8 py-3 bg-accent text-white rounded-lg font-semibold shadow-lg shadow-accent/25 hover:bg-accentLight hover:shadow-accent/40 hover:-translate-y-1 transition-all cursor-pointer"
+              >
+                View My Work
               </Link>
               <a
                 href="https://github.com/ManishSukheja"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="px-8 py-3 glass-card text-accent rounded-lg font-semibold hover:bg-accent hover:text-white transition-all flex items-center gap-2 group"
               >
-                <button className="px-6 py-3 glass-card text-slate-900 border border-slate-300 rounded-lg font-bold hover:bg-white/50 hover:text-accent transition-all flex items-center gap-2 shadow-md hover:shadow-lg">
-                  <FaGithub size={20} /> GitHub
-                </button>
+                <FaGithub className="text-xl group-hover:scale-110 transition-transform" />
+                GitHub
               </a>
-              <Link to="contact" smooth duration={500}>
-                <button className="px-6 py-3 border-2 border-accent text-accent rounded-lg font-bold hover:bg-accent/10 transition-all">
-                  Get In Touch
-                </button>
+              <Link
+                to="contact"
+                smooth
+                duration={500}
+                className="px-8 py-3 glass-card text-slate-700 rounded-lg font-semibold hover:bg-white hover:text-accent transition-all cursor-pointer"
+              >
+                Get In Touch
               </Link>
-              
             </motion.div>
+          </div>
+        </div>
 
+        {/* Hero Visual */}
+        <div className="order-1 md:order-2 flex justify-center">
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.7 }}
-              className="space-y-3"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: isMobile ? 0.5 : 0.8 }}
+              className="relative w-64 h-64 md:w-96 md:h-96 flex items-center justify-center"
             >
-              <div className="flex items-center gap-3 text-slate-700 font-medium group cursor-pointer">
-                <div className="p-2 bg-white/50 rounded-full text-accent group-hover:scale-110 transition-transform">
-                  <FaEnvelope />
-                </div>
-                <a href="mailto:mani.s.sukheja@gmail.com" className="hover:text-accent transition-colors">
-                  mani.s.sukheja@gmail.com
-                </a>
-              </div>
-              <div className="flex items-center gap-3 text-slate-700 font-medium">
-                <div className="p-2 bg-white/50 rounded-full text-accent">
-                   <FaMapMarkerAlt />
-                </div>
-                <span>Mumbai, India</span>
-              </div>
-            </motion.div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex justify-center"
-          >
             <motion.div
               animate={{ y: [0, -20, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
