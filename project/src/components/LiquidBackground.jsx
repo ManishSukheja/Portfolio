@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const LiquidBackground = () => {
   const canvasRef = useRef(null);
+  const [filterDeviation, setFilterDeviation] = useState(40);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -11,20 +12,33 @@ const LiquidBackground = () => {
     let particles = [];
     const mouse = { x: -1000, y: -1000 };
 
+    // Mobile resolution scale factor
+    // 0.5 means rendering at half resolution, then upscaling with CSS
+    // This reduces the SVG filter area by 4x, massive performance boost
+    let dpr = 1;
+
     const init = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      const isMobile = window.innerWidth < 768;
       
-      const isMobile = width < 768;
+      // OPTIMIZATION: Downscale canvas on mobile
+      dpr = isMobile ? 0.5 : 1; 
+      setFilterDeviation(isMobile ? 20 : 40); // Reduce blur radius on smaller canvas
+
+      width = canvas.width = window.innerWidth * dpr;
+      height = canvas.height = window.innerHeight * dpr;
       
+      // Reset scale transform so we don't accumulate
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+
       particles = [];
       // Reduce particle count significantly on mobile for performance
       const particleCount = isMobile ? 6 : 12; 
       
       for (let i = 0; i < particleCount; i++) {
         particles.push({
-          x: Math.random() * width,
-          y: Math.random() * height,
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
           vx: (Math.random() - 0.5) * 1.5,
           vy: (Math.random() - 0.5) * 1.5,
           size: isMobile ? Math.random() * 80 + 60 : Math.random() * 150 + 100, // Smaller blobs on mobile
@@ -52,10 +66,8 @@ const LiquidBackground = () => {
     };
 
     const update = () => {
-        // Clear with a slight trail effect or clean clear
-        ctx.clearRect(0, 0, width, height);
-        
-        // We will draw particles and let the CSS/SVG filter handle the "goo" liquid effect
+        // Clear based on actual canvas dimensions
+        ctx.clearRect(0, 0, width / dpr, height / dpr); // Clear logic must match context scale
         
         // Scroll Interaction - Liquid Momentum
         const currentScrollY = window.scrollY;
@@ -65,73 +77,54 @@ const LiquidBackground = () => {
 
         // Mouse Follower Blob
         particles.forEach((p, i) => {
-            // Apply Scroll Force (Liquid Drag)
-            // When scrolling down, drag liquid up slightly (inertia)
+            // physics ...
             if (Math.abs(scrollDelta) > 0) {
                 p.vy -= scrollDelta * 0.01; 
-                // Add slight turbulence/wobble on fast scroll
                 p.vx += (Math.random() - 0.5) * Math.abs(scrollDelta) * 0.005;
             }
 
-            // Move
             p.x += p.vx;
             p.y += p.vy;
 
-            // Bounce
-            if (p.x < -p.size) p.x = width + p.size;
-            if (p.x > width + p.size) p.x = -p.size;
-            if (p.y < -p.size) p.y = height + p.size;
-            if (p.y > height + p.size) p.y = -p.size;
+            // Bounce logic uses logical window coordinates, not scaled ones
+            if (p.x < -p.size) p.x = window.innerWidth + p.size;
+            if (p.x > window.innerWidth + p.size) p.x = -p.size;
+            if (p.y < -p.size) p.y = window.innerHeight + p.size;
+            if (p.y > window.innerHeight + p.size) p.y = -p.size;
 
-            // Interactive Flow - Mouse Attraction
             const dx = mouse.x - p.x;
             const dy = mouse.y - p.y;
             const dist = Math.sqrt(dx*dx + dy*dy);
             
             if (dist < 400) {
                 const angle = Math.atan2(dy, dx);
-                // Gentle attraction
                 p.vx += Math.cos(angle) * 0.05; 
                 p.vy += Math.sin(angle) * 0.05;
             }
 
-            // Speed limit and damping (friction)
-            p.vx *= 0.98; // Slightly more friction for heavy liquid feel
+            p.vx *= 0.98;
             p.vy *= 0.98;
             
-            // Keep them moving randomly if stopped
             if (Math.abs(p.vx) < 0.1) p.vx += (Math.random() - 0.5) * 0.5;
             if (Math.abs(p.vy) < 0.1) p.vy += (Math.random() - 0.5) * 0.5;
 
             ctx.beginPath();
-            ctx.fillStyle = p.color; // Consistent color
+            ctx.fillStyle = p.color; 
             ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
             ctx.fill();
         });
 
-        // Draw Organic Wobbly Mouse Blob - Smoother & Slower for better merging
-        const t = Date.now() * 0.0015; // Much slower for viscous feel
+        const t = Date.now() * 0.0015; 
         ctx.beginPath();
-        const baseRadius = width < 768 ? 50 : 80; // Smaller cursor blobon mobile
+        const baseRadius = window.innerWidth < 768 ? 50 : 80; 
         
-        for (let angle = 0; angle <= Math.PI * 2; angle += 0.1) { // Reduced resolution (0.05 -> 0.1) for performance
-            
-            // Harmonic 1: Oval distortion (Slow breathing)
+        for (let angle = 0; angle <= Math.PI * 2; angle += 0.1) {
             const h1 = Math.sin(angle * 2 + t) * 10;
-            
-            // Harmonic 2: Triangular wobble (Gentle rotation)
-            // Reduced amplitude to prevent 'snapping' when merging
             const h2 = Math.cos(angle * 3 - t * 0.8) * 8;
-            
-            // Harmonic 3: Very subtle variation
             const h3 = Math.sin(angle * 5 + t * 1.5) * 4;
-
-            // Combined radius with less extreme variance
             const r = baseRadius + h1 + h2 + h3;
-            
             const x = mouse.x + Math.cos(angle) * r;
             const y = mouse.y + Math.sin(angle) * r;
-            
             if (angle === 0) ctx.moveTo(x, y);
             else ctx.lineTo(x, y);
         }
@@ -161,7 +154,7 @@ const LiquidBackground = () => {
       {/* SVG Filter for the Gooey Liquid Effect */}
       <svg style={{ position: 'absolute', width: 0, height: 0 }}>
         <filter id="goo">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="40" result="blur" />
+          <feGaussianBlur in="SourceGraphic" stdDeviation={filterDeviation} result="blur" />
           <feColorMatrix 
             in="blur" 
             mode="matrix" 
