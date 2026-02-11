@@ -1,40 +1,17 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+
 import { FaGithub, FaExternalLinkAlt, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { projects } from '../data/projects';
 
 const Projects = () => {
-  const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+
   const [expandedId, setExpandedId] = useState(null);
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: isMobile ? 0.05 : 0.1,
-    rootMargin: isMobile ? '-50px 0px' : '-100px 0px',
-  });
 
   const toggleExpand = (id) => {
     setExpandedId(expandedId === id ? null : id);
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: isMobile ? 0.1 : 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: isMobile ? { opacity: 0 } : { opacity: 0, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: isMobile ? 0.3 : 0.6 },
-    },
-  };
 
   const getCategoryColor = (category) => {
     switch (category) {
@@ -52,15 +29,9 @@ const Projects = () => {
   return (
     <section id="projects" className="py-20 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          ref={ref}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          variants={containerVariants}
-        >
+        <div>
           <div className="flex flex-col items-center justify-center mb-16">
-            <motion.div 
-              variants={itemVariants}
+            <div 
               className="glass-card px-8 py-3 rounded-full mb-4 bg-white/40 backdrop-blur-md border border-white/50 shadow-sm"
             >
                <h2 className="text-4xl md:text-5xl font-bold text-center">
@@ -68,23 +39,21 @@ const Projects = () => {
                   Featured Projects
                 </span>
               </h2>
-            </motion.div>
-            <motion.p
-              variants={itemVariants}
+
+            </div>
+            <p
               className="text-center text-slate-600 text-lg font-medium"
             >
               A showcase of my recent work and achievements
-            </motion.p>
+            </p>
           </div>
 
-          <motion.div
-            variants={containerVariants}
+          <div
             className="grid md:grid-cols-2 gap-6"
           >
             {projects.map((project) => (
               <motion.div
                 key={project.id}
-                variants={itemVariants}
                 whileHover={{ scale: 1.02 }}
                 className="glass-card rounded-xl overflow-hidden transition-all duration-300"
               >
@@ -210,8 +179,8 @@ const Projects = () => {
                 </div>
               </motion.div>
             ))}
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );

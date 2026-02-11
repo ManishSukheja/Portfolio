@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+
 import { FaGithub, FaLinkedin, FaEnvelope, FaPhone } from 'react-icons/fa';
 
 const Contact = () => {
@@ -12,12 +12,6 @@ const Contact = () => {
     message: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: isMobile ? 0.05 : 0.1,
-    rootMargin: isMobile ? '-50px 0px' : '-100px 0px',
-  });
 
   const handleChange = (e) => {
     setFormData({
@@ -36,25 +30,6 @@ const Contact = () => {
   };
 
 
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: isMobile ? 0.1 : 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: isMobile ? { opacity: 0 } : { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: isMobile ? 0.3 : 0.6 },
-    },
-  };
 
   const contactMethods = [
     {
@@ -83,15 +58,9 @@ const Contact = () => {
   return (
     <section id="contact" className="py-20 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          ref={ref}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          variants={containerVariants}
-        >
+        <div>
           <div className="flex flex-col items-center justify-center mb-16">
-            <motion.div 
-              variants={itemVariants}
+            <div 
               className="glass-card px-8 py-3 rounded-full mb-4 bg-white/40 backdrop-blur-md border border-white/50 shadow-sm"
             >
               <h2 className="text-4xl md:text-5xl font-bold text-center">
@@ -99,17 +68,16 @@ const Contact = () => {
                   Get In Touch
                 </span>
               </h2>
-            </motion.div>
-            <motion.p
-              variants={itemVariants}
+            </div>
+            <p
               className="text-center text-slate-600 text-lg font-medium"
             >
               Let's connect and discuss our next project
-            </motion.p>
+            </p>
           </div>
 
           <div className="grid lg:grid-cols-1 gap-12">
-            <motion.div variants={itemVariants} className="space-y-6">
+            <div className="space-y-6">
               <h3 className="text-2xl font-bold text-slate-900 mb-6">Contact Information</h3>
               <div className="grid sm:grid-cols-3 gap-4">
                 {contactMethods.map((method, idx) => (
@@ -145,9 +113,9 @@ const Contact = () => {
                   Available for full-time, remote and on-site opportunities.
                 </p>
               </div>
-            </motion.div>
+            </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

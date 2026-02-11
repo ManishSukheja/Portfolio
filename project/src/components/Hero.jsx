@@ -26,7 +26,7 @@ const Hero = () => {
     }
   }, [index]);
 
-  const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+
 
   return (
     <section id="home" className="min-h-screen relative flex items-center justify-center pt-16 overflow-hidden">
@@ -37,38 +37,18 @@ const Hero = () => {
           <div className="glass-card p-6 sm:p-8 md:p-10 rounded-3xl shadow-xl backdrop-blur-md border border-white/40 bg-white/30 relative overflow-hidden group hover:border-accent/30 transition-colors duration-500">
             <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
             
-            <motion.h1
-              initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: isMobile ? 0.1 : 0.3, duration: isMobile ? 0.4 : 0.6 }}
-              className="text-5xl md:text-6xl font-bold text-slate-900 mb-4 drop-shadow-sm"
-            >
+            <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-4 drop-shadow-sm">
               Hi, I'm <br/><span className="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent drop-shadow-sm">Manish Sukheja</span>
-            </motion.h1>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: isMobile ? 0.2 : 0.4 }}
-              className="text-2xl md:text-3xl text-slate-800 font-semibold mb-6 h-10 flex items-center justify-center md:justify-start gap-2"
-            >
+            </h1>
+            <div className="text-2xl md:text-3xl text-slate-800 font-semibold mb-6 h-10 flex items-center justify-center md:justify-start gap-2">
               {displayText}
               <span className="w-1 h-8 bg-slate-900 animate-pulse block"></span>
-            </motion.div>
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: isMobile ? 0.3 : 0.5 }}
-              className="text-slate-700 text-lg mb-8 leading-relaxed font-medium"
-            >
+            </div>
+            <p className="text-slate-700 text-lg mb-8 leading-relaxed font-medium">
               I build exceptional digital experiences that live on the internet. 
               Focused on creating accessible, pixel-perfect, and performant web applications.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: isMobile ? 0.4 : 0.6, duration: isMobile ? 0.4 : 0.6 }}
-              className="flex flex-wrap gap-4 justify-center md:justify-start"
-            >
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center md:justify-start">
               <Link
                 to="projects"
                 smooth
@@ -94,18 +74,12 @@ const Hero = () => {
               >
                 Get In Touch
               </Link>
-            </motion.div>
+            </div>
           </div>
         </div>
 
-        {/* Hero Visual */}
         <div className="order-1 md:order-2 flex justify-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: isMobile ? 0.5 : 0.8 }}
-              className="relative w-64 h-64 md:w-96 md:h-96 flex items-center justify-center"
-            >
+            <div className="relative w-64 h-64 md:w-96 md:h-96 flex items-center justify-center">
             <motion.div
               animate={{ y: [0, -20, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
@@ -139,7 +113,7 @@ const Hero = () => {
                 className="absolute inset-0 bg-cyan-500/30 blur-3xl -z-10"
               ></motion.div>
             </motion.div>
-          </motion.div>
+            </div>
         </div>
       </div>
     </section>

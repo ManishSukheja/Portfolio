@@ -1,14 +1,8 @@
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+
 
 const About = () => {
   const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
-
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: isMobile ? 0.05 : 0.1, // Trigger almost immediately on mobile
-    rootMargin: isMobile ? '-50px 0px' : '-100px 0px', // Start animation before it's too high up
-  });
 
   const stats = [
     { label: 'Years Experience', value: '3' },
@@ -32,37 +26,12 @@ const About = () => {
 
 
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: isMobile ? 0.1 : 0.2, // Faster staggering on mobile
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: isMobile ? { opacity: 0 } : { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: isMobile ? 0.4 : 0.6 },
-    },
-  };
-
   return (
     <section id="about" className="py-20 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          ref={ref}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          variants={containerVariants}
-        >
+        <div>
           <div className="flex flex-col items-center justify-center mb-16">
-            <motion.div 
-              variants={itemVariants}
+            <div 
               className="glass-card px-8 py-3 rounded-full mb-4 bg-white/40 backdrop-blur-md border border-white/50 shadow-sm"
             >
               <h2 className="text-4xl md:text-5xl font-bold text-center">
@@ -70,10 +39,10 @@ const About = () => {
                   About Me
                 </span>
               </h2>
-            </motion.div>
+            </div>
           </div>
 
-          <motion.div variants={itemVariants} className="glass-card p-8 rounded-2xl max-w-4xl mx-auto space-y-6 mb-12 text-slate-600 text-lg shadow-lg">
+          <div className="glass-card p-8 rounded-2xl max-w-4xl mx-auto space-y-6 mb-12 text-slate-600 text-lg shadow-lg">
             <p>
               I'm a passionate Full Stack Developer with approximately 3 years of professional experience.
               I specialize in building robust, scalable web applications and have a strong background in
@@ -84,16 +53,14 @@ const About = () => {
               (Android). I'm a quick learner with a strong problem-solving mindset and
               a passion for continuous improvement.
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            variants={containerVariants}
+          <div
             className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
           >
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
-                variants={itemVariants}
                 whileHover={{ scale: 1.05 }}
                 className="glass-card p-6 rounded-xl text-center transition-all duration-300 hover:-translate-y-1"
               >
@@ -101,15 +68,14 @@ const About = () => {
                 <div className="text-slate-600 text-sm md:text-base">{stat.label}</div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
 
-          <motion.div variants={itemVariants}>
+          <div>
             <h3 className="text-3xl font-bold text-slate-900 mb-8 text-center">Education</h3>
             <div className="w-full max-w-3xl mx-auto flex flex-col gap-6 sm:flex-row sm:flex-wrap sm:justify-center">
   {education.map((edu, index) => (
-    <motion.div
+    <div
       key={index}
-      variants={itemVariants}
       className="glass-card p-6 rounded-xl border-l-[6px] border-l-accent transition-all w-full sm:min-w-[350px] sm:max-w-xs hover:shadow-lg"
     >
                   <div className="flex items-start justify-between flex-wrap gap-4">
@@ -121,12 +87,12 @@ const About = () => {
                       {edu.date}
                     </div>
                   </div>
-                </motion.div>
+    </div>
               ))}
             </div>
 
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );

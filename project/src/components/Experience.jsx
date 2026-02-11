@@ -1,53 +1,24 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+
 import { FaChevronDown, FaChevronUp, FaMapMarkerAlt, FaCalendar } from 'react-icons/fa';
 import { experiences } from '../data/experiences';
 
 const Experience = () => {
-  const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+
   const [expandedId, setExpandedId] = useState(null);
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: isMobile ? 0.05 : 0.1,
-    rootMargin: isMobile ? '-50px 0px' : '-100px 0px',
-  });
 
   const toggleExpand = (id) => {
     setExpandedId(expandedId === id ? null : id);
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: isMobile ? 0.1 : 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: isMobile ? { opacity: 0 } : { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: isMobile ? 0.3 : 0.6 },
-    },
-  };
 
   return (
     <section id="experience" className="py-20 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          ref={ref}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          variants={containerVariants}
-        >
+        <div>
           <div className="flex flex-col items-center justify-center mb-16">
-            <motion.div 
-              variants={itemVariants}
+            <div 
               className="glass-card px-8 py-3 rounded-full mb-4 bg-white/40 backdrop-blur-md border border-white/50 shadow-sm"
             >
               <h2 className="text-4xl md:text-5xl font-bold text-center">
@@ -55,20 +26,18 @@ const Experience = () => {
                   Experience
                 </span>
               </h2>
-            </motion.div>
-            <motion.p
-              variants={itemVariants}
+            </div>
+            <p
               className="text-center text-slate-600 text-lg font-medium"
             >
               My professional journey and contributions
-            </motion.p>
+            </p>
           </div>
 
           <div className="max-w-4xl mx-auto space-y-6">
             {experiences.map((exp, index) => (
-              <motion.div
+              <div
                 key={exp.id}
-                variants={itemVariants}
                 className="glass-card rounded-xl overflow-hidden transition-all duration-300"
               >
                 <button
@@ -142,15 +111,12 @@ const Experience = () => {
                           </h4>
                           <div className="flex flex-wrap gap-2">
                             {exp.technologies.map((tech, idx) => (
-                              <motion.span
+                              <span
                                 key={idx}
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: idx * 0.05 }}
                                 className="px-3 py-1 bg-white/40 text-accent border border-accent/20 rounded-full text-sm"
                               >
                                 {tech}
-                              </motion.span>
+                              </span>
                             ))}
                           </div>
                         </div>
@@ -158,10 +124,10 @@ const Experience = () => {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </motion.div>
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
