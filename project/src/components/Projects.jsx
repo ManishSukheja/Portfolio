@@ -13,18 +13,7 @@ const Projects = () => {
   };
 
 
-  const getCategoryColor = (category) => {
-    switch (category) {
-      case 'Web Application':
-        return 'bg-blue-500/20 text-blue-400 border-blue-400/30';
-      case 'Mobile Application':
-        return 'bg-green-500/20 text-green-400 border-green-400/30';
-      case 'Standalone Application':
-        return 'bg-purple-500/20 text-purple-400 border-purple-400/30';
-      default:
-        return 'bg-accent/20 text-accent border-accent/30';
-    }
-  };
+
 
   return (
     <section id="projects" className="py-20 relative z-10">
@@ -67,13 +56,7 @@ const Projects = () => {
                         <span className="px-3 py-1 bg-accent/10 text-accent rounded-full text-xs font-semibold">
                           {project.type}
                         </span>
-                        <span
-                          className={`px-3 py-1 rounded-full text-xs font-semibold border ${getCategoryColor(
-                            project.category
-                          )}`}
-                        >
-                          {project.category}
-                        </span>
+
                       </div>
                     </div>
                   </div>
@@ -146,21 +129,27 @@ const Projects = () => {
                     ))}
                   </div>
 
-                  <div className="flex gap-4">
-                    <a
-                      href={project.githubLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 glass-card text-accent rounded-lg hover:text-white hover:bg-accent transition-all"
-                    >
-                      <FaGithub /> GitHub
-                    </a>
+                  <div className="flex gap-2.5 sm:gap-4 flex-wrap sm:flex-nowrap">
+                    {project.githubLink ? (
+                      <a
+                        href={project.githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-3 sm:px-4 py-2 text-sm sm:text-base glass-card text-accent rounded-lg hover:text-white hover:bg-accent transition-all whitespace-nowrap order-1"
+                      >
+                        <FaGithub /> GitHub
+                      </a>
+                    ) : (
+                      <span className="flex items-center gap-2 px-3 sm:px-4 py-2 text-sm sm:text-base border border-slate-500/30 bg-slate-50/50 backdrop-blur-md text-slate-600 rounded-lg cursor-default whitespace-nowrap hover:bg-slate-100/50 transition-colors shadow-sm order-1">
+                        <FaGithub /> Code on Request
+                      </span>
+                    )}
                     {project.liveLink && (
                       <a
                         href={project.liveLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-accent to-accentLight text-white rounded-lg hover:scale-105 transition-transform"
+                        className="flex items-center gap-2 px-3 sm:px-4 py-2 text-sm sm:text-base bg-gradient-to-r from-accent to-accentLight text-white rounded-lg hover:scale-105 transition-transform whitespace-nowrap order-2"
                       >
                         <FaExternalLinkAlt /> Live Demo
                       </a>
@@ -170,7 +159,7 @@ const Projects = () => {
                         href={project.reportLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-accent to-accentLight text-white rounded-lg hover:scale-105 transition-transform"
+                        className="flex items-center gap-2 px-3 sm:px-4 py-2 text-sm sm:text-base bg-gradient-to-r from-accent to-accentLight text-white rounded-lg hover:scale-105 transition-transform whitespace-nowrap order-3"
                       >
                         <FaExternalLinkAlt /> Project Report
                       </a>

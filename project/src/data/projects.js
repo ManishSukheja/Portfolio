@@ -1,9 +1,53 @@
 export const projects = [
-    {
+  {
     id: 1,
+    title: 'Luxury Jeweller',
+    type: 'Jewellery E-Commerce Platform',
+    description: 'Modern luxury jewellery website with elegant UI, smooth routing, and AI chatbot integration for enhanced customer interaction.',
+    technologies: ['React.js', 'React Router', 'Component Architecture', 'AI Chatbot', 'CSS'],
+    achievements: [
+      'Designed premium, modern responsive UI with reusable component structure',
+      'Implemented seamless routing for smooth user navigation',
+      'Integrated AI chatbot to enhance customer engagement experience',
+    ],
+    features: ['Responsive Design', 'Component-Based Architecture', 'AI Chatbot', 'Smooth Routing'],
+    githubLink: null,
+    liveLink: 'https://luxury-jeweller.vercel.app/',
+  },
+  {
+    id: 2,
+    title: 'RS Infotek',
+    type: 'Corporate Website',
+    description: 'Corporate business website built with clean layout, structured UI, and fully responsive design for professional brand presence.',
+    technologies: ['React.js', 'CSS', 'Responsive Design'],
+    achievements: [
+      'Developed structured and scalable layout for corporate branding',
+      'Optimized responsiveness across desktop, tablet, and mobile',
+      'Focused on minimal and clean UI for better readability',
+    ],
+    features: ['Clean Layout', 'Responsive Design', 'Corporate Branding UI'],
+    githubLink: null,
+    liveLink: 'https://rs-infotek.vercel.app/',
+  },
+  {
+    id: 3,
+    title: 'Real Estate Platform',
+    type: 'Property Listing Platform',
+    description: 'Dynamic real estate platform featuring structured UI and organized property listings for improved user browsing experience.',
+    technologies: ['React.js', 'Dynamic Rendering', 'CSS', 'Component Architecture'],
+    achievements: [
+      'Built structured UI for better property categorization and filtering',
+      'Implemented dynamic listing layout for scalable property data',
+      'Ensured responsive and user-friendly browsing experience',
+    ],
+    features: ['Dynamic Listings', 'Structured UI', 'Responsive Design'],
+    githubLink: null,
+    liveLink: 'https://real-estate-lemon-theta.vercel.app/',
+  },
+  {
+    id: 4,
     title: 'Expense Tracker',
     type: 'React Project',
-    category: 'Web Application',
     description: 'Responsive personal finance tracker with features to add, edit, and delete expenses with monthly summaries and category charts.',
     technologies: ['React.js', 'Material UI', 'REST APIs', 'Axios'],
     achievements: [
@@ -16,10 +60,9 @@ export const projects = [
     liveLink: 'https://expensetracker-sigma-seven.vercel.app/',
   },
   {
-    id: 2,
+    id: 5,
     title: 'Smart Resume Analyzer',
-    type: 'NLP Machine Learning',
-    category: 'Standalone Application',
+    type: 'NLP Machine Learning Project',
     description: 'Intelligent platform to evaluate resumes using keywords and formatting analysis with admin dashboard for candidate visualization.',
     technologies: ['Python', 'SQL', 'PHP'],
     achievements: [
@@ -32,10 +75,9 @@ export const projects = [
     liveLink: null,
   },
   {
-    id: 3,
+    id: 6,
     title: 'Farm 2 Plate',
-    type: 'E-Commerce',
-    category: 'Mobile Application',
+    type: 'E-Commerce Android App',
     description: 'E-commerce Android app for ordering farm products online with real-time tracking and location-based suggestions for Shreeguru Charitra Agro.',
     technologies: ['Android Studio', 'Firebase', 'XML'],
     achievements: [
@@ -48,20 +90,5 @@ export const projects = [
     liveLink: null,
     reportLink: 'https://drive.google.com/file/d/1mHlb6Ak6udeHhajCgh6axXHKMpudOS6h/view?usp=sharing'
   },
-  {
-    id: 4,
-    title: 'QKart',
-    type: 'E-Commerce',
-    category: 'Web Application',
-    description: 'Full-featured e-commerce web application with authentication, search with debouncing, and optimized cart management.',
-    technologies: ['React.js', 'Material UI', 'React Router', 'Axios', 'REST APIs'],
-    achievements: [
-      'Implemented search with debouncing and login persistence using localStorage',
-      'Optimized API calls and UI rendering, reducing product load time by 30%',
-      'Enhanced responsive design for user-friendly shopping experience',
-    ],
-    features: ['Authentication', 'Product Search', 'Shopping Cart', 'Responsive Design'],
-    githubLink: 'https://github.com/ManishSukheja/mani-s-sukheja-ME_QKART_FRONTEND_V2',
-    liveLink: 'https://mani-s-sukheja-qkart.vercel.app/',
-  },
+
 ];

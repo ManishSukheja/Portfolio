@@ -72,18 +72,18 @@ const About = () => {
 
           <div>
             <h3 className="text-3xl font-bold text-slate-900 mb-8 text-center">Education</h3>
-            <div className="w-full max-w-3xl mx-auto flex flex-col gap-6 sm:flex-row sm:flex-wrap sm:justify-center">
+            <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
   {education.map((edu, index) => (
     <div
       key={index}
-      className="glass-card p-6 rounded-xl border-l-[6px] border-l-accent transition-all w-full sm:min-w-[350px] sm:max-w-xs hover:shadow-lg"
+      className="glass-card p-6 rounded-xl border-l-[6px] border-l-accent transition-all w-full hover:shadow-lg h-full flex flex-col justify-center"
     >
                   <div className="flex items-start justify-between flex-wrap gap-4">
                     <div>
                       <h4 className="text-xl font-semibold text-slate-900 mb-2">{edu.degree}</h4>
-                      <p className="text-slate-600">{edu.institution}</p>
+                      <p className="text-slate-600 font-medium">{edu.institution}</p>
                     </div>
-                    <div className="px-4 py-2 bg-accent/10 rounded-lg text-accent font-semibold">
+                    <div className="px-4 py-2 bg-accent/10 rounded-lg text-accent font-semibold whitespace-nowrap">
                       {edu.date}
                     </div>
                   </div>
