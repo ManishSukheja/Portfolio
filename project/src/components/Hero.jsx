@@ -5,26 +5,43 @@ import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaGithub } from 'react-icons/fa';
 import mainLogo from "../resources/main_logo_w.png";
 
 
+const ROLE_TITLES = ['Full Stack Developer', 'Frontend Developer', 'Java Backend Developer'];
+
 const Hero = () => {
   const [displayText, setDisplayText] = useState('');
-  const fullText = 'Full Stack Developer';
-  const [index, setIndex] = useState(0);
+  const [titleIndex, setTitleIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    if (index < fullText.length) {
-      const timeout = setTimeout(() => {
-        setDisplayText((prev) => prev + fullText[index]);
-        setIndex(index + 1);
-      }, 100);
-      return () => clearTimeout(timeout);
+    const currentTitle = ROLE_TITLES[titleIndex];
+    let timeoutId;
+
+    if (isDeleting) {
+      if (charIndex > 0) {
+        timeoutId = setTimeout(() => {
+          setDisplayText((prev) => prev.slice(0, -1));
+          setCharIndex(charIndex - 1);
+        }, 50);
+      } else {
+        setIsDeleting(false);
+        setTitleIndex((prev) => (prev + 1) % ROLE_TITLES.length);
+      }
     } else {
-      const resetTimeout = setTimeout(() => {
-        setDisplayText('');
-        setIndex(0);
-      }, 3000);
-      return () => clearTimeout(resetTimeout);
+      if (charIndex < currentTitle.length) {
+        timeoutId = setTimeout(() => {
+          setDisplayText((prev) => prev + currentTitle[charIndex]);
+          setCharIndex(charIndex + 1);
+        }, 100);
+      } else {
+        timeoutId = setTimeout(() => {
+          setIsDeleting(true);
+        }, 2000);
+      }
     }
-  }, [index]);
+
+    return () => clearTimeout(timeoutId);
+  }, [charIndex, isDeleting, titleIndex]);
 
 
 

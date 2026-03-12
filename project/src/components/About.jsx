@@ -6,19 +6,19 @@ const About = () => {
 
   const stats = [
     { label: 'Years Experience', value: '3' },
-    { label: 'Projects Completed', value: '10+' },
+    { label: 'Projects Completed', value: '15+' },
     { label: 'DSA Problems Solved', value: '150+' },
     { label: 'Code Issues Resolved', value: '300+' }
   ];
 
   const education = [
     {
-      degree: 'Master of Computer Applications',
+      degree: "Master's of Computer Applications",
       date: 'July 2024',
       institution: "Vivekanand Education Society's Institute of Technology, Mumbai",
     },
     {
-      degree: 'Bachelor of Science (Computer Science)',
+      degree: "Bachelor's of Science (Computer Science)",
       date: 'October 2020',
       institution: "Vivekanand Education Society's College of Arts, Science & Commerce, Mumbai",
     },

@@ -1,6 +1,26 @@
 export const experiences = [
   {
+    id: 0,
+    type: 'full-time',
+    position: 'Freelance Full Stack Developer',
+    company: 'Self Employed',
+    companyFull: 'Self Employed',
+    period: 'December 2024 - Present',
+    location: 'Mumbai, Maharashtra',
+    description: 'Developing full-stack applications and handling complete project lifecycles',
+    achievements: [
+      'Delivered 7+ full-stack applications across real estate, jewelry, and e-commerce domains.',
+      'Developed production-ready applications using React.js, Java, Spring Boot, REST APIs, MySQL.',
+      'Optimized backend queries, improving API response time by up to 35%.',
+      'Built responsive UI using Material UI, enhancing user engagement and mobile usability.',
+      'Deployed applications on Vercel and cloud platforms, handling DNS and domain setup.',
+      'Handled complete project lifecycle from requirements to deployment and post-launch support.',
+    ],
+    technologies: ['React.js', 'Java', 'Spring Boot', 'REST APIs', 'MySQL', 'Material UI', 'Vercel'],
+  },
+  {
     id: 1,
+    type: 'full-time',
     position: 'Software Developer',
     company: 'TransUnion CIBIL via MITS Global Consulting Pvt. Ltd.',
     companyFull: 'TransUnion CIBIL (via MITS Global Consulting Pvt. Ltd.)',
@@ -18,6 +38,7 @@ export const experiences = [
   },
   {
     id: 2,
+    type: 'internship',
     position: 'Developer Intern',
     company: 'Indian Institute of Technology (IIT), Bombay',
     companyFull: 'Indian Institute of Technology (IIT), Bombay',
@@ -34,6 +55,7 @@ export const experiences = [
   },
   {
     id: 3,
+    type: 'full-time',
     position: 'Programmer',
     company: 'Tata Consultancy Services',
     companyFull: 'Tata Consultancy Services (TCS)',
@@ -50,6 +72,7 @@ export const experiences = [
   },
   {
     id: 4,
+    type: 'internship',
     position: 'Android Intern',
     company: 'Maxe Infotech',
     companyFull: 'Maxe Infotech',

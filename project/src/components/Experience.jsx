@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import { FaChevronDown, FaChevronUp, FaMapMarkerAlt, FaCalendar } from 'react-icons/fa';
+import { FaChevronDown, FaChevronUp, FaMapMarkerAlt, FaCalendar, FaBriefcase, FaGraduationCap } from 'react-icons/fa';
 import { experiences } from '../data/experiences';
 
 const Experience = () => {
 
   const [expandedId, setExpandedId] = useState(null);
+  const [activeTab, setActiveTab] = useState('full-time');
 
   const toggleExpand = (id) => {
     setExpandedId(expandedId === id ? null : id);
@@ -34,12 +35,50 @@ const Experience = () => {
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto space-y-6">
-            {experiences.map((exp, index) => (
-              <div
-                key={exp.id}
-                className="glass-card rounded-xl overflow-hidden transition-all duration-300"
+          <div className="flex justify-center mb-12">
+            <div className="glass-card p-1.5 rounded-full inline-flex bg-white/40 backdrop-blur-md border border-white/50 shadow-sm relative z-20">
+              <button
+                onClick={() => { setActiveTab('full-time'); setExpandedId(null); }}
+                className={`px-6 md:px-8 py-2.5 rounded-full text-sm md:text-base font-semibold transition-all duration-300 flex items-center gap-2 ${
+                  activeTab === 'full-time'
+                    ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
+                }`}
               >
+                <FaBriefcase />
+                Full-Time
+              </button>
+              <button
+                onClick={() => { setActiveTab('internship'); setExpandedId(null); }}
+                className={`px-6 md:px-8 py-2.5 rounded-full text-sm md:text-base font-semibold transition-all duration-300 flex items-center gap-2 ${
+                  activeTab === 'internship'
+                    ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
+                }`}
+              >
+                <FaGraduationCap />
+                Internships
+              </button>
+            </div>
+          </div>
+
+          <div className="max-w-4xl mx-auto space-y-6">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="space-y-6"
+              >
+                {experiences
+                  .filter((exp) => exp.type === activeTab)
+                  .map((exp, index) => (
+                  <div
+                    key={exp.id}
+                    className="glass-card rounded-xl overflow-hidden transition-all duration-300"
+                  >
                 <button
                   onClick={() => toggleExpand(exp.id)}
                   className="w-full p-6 text-left hover:bg-white/40 transition-all"
@@ -126,6 +165,8 @@ const Experience = () => {
                 </AnimatePresence>
               </div>
             ))}
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>
